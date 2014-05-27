@@ -17,6 +17,13 @@ class AudioURLTransformer(object):
    if not regexp.search(url):
     continue
    return processor(self, url)
+  raise ValueError("Unable to find a processor for url %s" % url)
+
+ def is_audio_url(self, url):
+  for regexp in self.matches:
+   if regexp.search(url):
+    return True
+  return False
 
  def transform_soundcloud(self, url):
   return self.soundcloud_api.get_stream_url(url)
