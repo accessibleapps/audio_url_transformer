@@ -15,7 +15,7 @@ class AudioURLTransformer(object):
   self.youtube_dl.add_default_info_extractors()
 
  def transform(self, url):
-  if url.lower.endswith(self.audio_extensions):
+  if url.lower().endswith(self.audio_extensions):
    return url
   for (regexp, processor) in self.matches.iteritems():
    if not regexp.search(url):
