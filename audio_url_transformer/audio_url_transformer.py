@@ -53,8 +53,8 @@ class AudioURLTransformer(object):
 
  matches = {
   re.compile(r'(^https?://(www\.)?(m\.)?soundcloud.com/.*/.*$)'): transform_soundcloud,
-  re.compile(r'(http://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
-  re.compile(r'(http://(?:www\.)?twup.me/.+)'): transform_twup,
+  re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
+  re.compile(r'(https?://(?:www\.)?twup.me/.+)'): transform_twup,
   re.compile(r'(https?://(?:www\.)?(audio)?boo.fm/b(oos/)?(\d+)(.*)?)'): transform_audioboo,
   re.compile(r'(https?://(?:www\.)?youtube.com/watch.+)'): transform_youtube,
   re.compile(r'(https?://(?:www\.)?youtu.be/.+)'): transform_youtube,
