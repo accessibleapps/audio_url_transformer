@@ -1,5 +1,7 @@
+from __future__ import absolute_import
+
 import re
-import soundcloud
+from . import soundcloud
 import youtube_dl
 
 class AudioURLTransformer(object):

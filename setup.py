@@ -7,9 +7,10 @@ setup(
  name = 'audio_url_transformer',
  version = __version__,
  description = __doc__,
- py_modules = ['audio_url_transformer'],
+ packages = find_packages(),
  install_requires = [
   'requests',
+  'youtube_dl',
  ],
  classifiers = [
   'Development Status :: 3 - Alpha',
