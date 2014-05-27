@@ -9,6 +9,8 @@ test_urls = [
  'http://twup.me/uE',
  'https://audioboo.fm/boos/2198170-vipadvisor-gas-vs-electric-cooker',
  'https://boo.fm/b2198170',
+ 'https://www.youtube.com/watch?v=v8qoB1XwtHM',
+ 'http://youtu.be/6GZDBO_TOHg',
 ]
 
 for url in test_urls:
