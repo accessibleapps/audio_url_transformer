@@ -4,7 +4,9 @@ import re
 from . import soundcloud
 import youtube_dl
 
+
 class AudioURLTransformer(object):
+ audio_extensions = ('.mp3', '.wav', '.ogg', '.flac', '.wma', '.m4a', '.aac')
 
  def __init__(self, soundcloud_client_id=None):
   if soundcloud_client_id:
@@ -13,6 +15,8 @@ class AudioURLTransformer(object):
   self.youtube_dl.add_default_info_extractors()
 
  def transform(self, url):
+  if url.lower.endswith(self.audio_extensions):
+   return url
   for (regexp, processor) in self.matches.iteritems():
    if not regexp.search(url):
     continue
@@ -20,6 +24,8 @@ class AudioURLTransformer(object):
   raise ValueError("Unable to find a processor for url %s" % url)
 
  def is_audio_url(self, url):
+  if url.endswith(self.audio_extensions):
+   return True
   for regexp in self.matches:
    if regexp.search(url):
     return True
