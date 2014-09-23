@@ -4,7 +4,6 @@ import re
 from . import soundcloud
 import youtube_dl
 
-
 class AudioURLTransformer(object):
  audio_extensions = ('.mp3', '.wav', '.ogg', '.flac', '.wma', '.m4a', '.aac')
 
@@ -40,8 +39,8 @@ class AudioURLTransformer(object):
  def transform_twup(self, url):
   return re.sub(r'(http://(?:www\.)?twup.me/.+)', r'\1', url)
 
- def transform_audioboo(self, url):
-  return re.sub(r'(https?://(?:www\.)?(audio)?boo.fm/b(oos/)?(\d+)(.*)?)', r'http://audioboo.fm/boos/\4.mp3', url)
+ def transform_audioboom(self, url):
+  return re.sub(r'(https?://(?:www\.)?(audio)?boo(m)?.fm/b(oos/)?(\d+)(.*)?)', r'http://audioboom.fm/boos/\4.mp3', url)
 
  def transform_youtube(self, url):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
@@ -55,7 +54,7 @@ class AudioURLTransformer(object):
   re.compile(r'(^https?://(www\.)?(m\.)?soundcloud.com/.*/.*$)'): transform_soundcloud,
   re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
   re.compile(r'(https?://(?:www\.)?twup.me/.+)'): transform_twup,
-  re.compile(r'(https?://(?:www\.)?(audio)?boo.fm/b(oos/)?(\d+)(.*)?)'): transform_audioboo,
+  re.compile(r'(https?://(?:www\.)?(audio)?boo(m)?.fm/b(oos/)?(\d+)(.*)?)'): transform_audioboom,
   re.compile(r'(https?://(?:www\.)?youtube.com/watch.+)'): transform_youtube,
   re.compile(r'(https?://(?:www\.)?youtu.be/.+)'): transform_youtube,
  }
