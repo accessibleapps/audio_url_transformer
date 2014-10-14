@@ -56,6 +56,6 @@ class AudioURLTransformer(object):
   re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
   re.compile(r'(https?://(?:www\.)?twup.me/.+)'): transform_twup,
   re.compile(r'(https?://(?:www\.)?(audio)?boo.fm/b(oos/)?(\d+)(.*)?)'): transform_audioboo,
-  re.compile(r'(https?://(?:www\.)?youtube.com/watch.+)'): transform_youtube,
-  re.compile(r'(https?://(?:www\.)?youtu.be/.+)'): transform_youtube,
+  re.compile(r'(https?://(?:www\.)?(m\.)?youtube.com/watch.+)'): transform_youtube,
+  re.compile(r'(https?://(?:www\.)?(m\.)?youtu.be/.+)'): transform_youtube,
  }
