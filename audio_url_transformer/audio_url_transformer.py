@@ -10,7 +10,7 @@ class AudioURLTransformer(object):
  def __init__(self, soundcloud_client_id=None):
   if soundcloud_client_id:
    self.soundcloud_api = soundcloud.SoundCloudAPI(soundcloud_client_id)
-  self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = "%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
+  self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
   self.youtube_dl.add_default_info_extractors()
 
  def transform(self, url):
