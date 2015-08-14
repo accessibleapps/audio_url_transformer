@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+from logging import getLogger
+logger = getLogger('audio_url_transformer')
 
 import re
 from . import soundcloud
@@ -10,8 +12,10 @@ class AudioURLTransformer(object):
  def __init__(self, soundcloud_client_id=None):
   if soundcloud_client_id:
    self.soundcloud_api = soundcloud.SoundCloudAPI(soundcloud_client_id)
+   logger.debug("Initialized Soundcloud support")
   self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
   self.youtube_dl.add_default_info_extractors()
+  logger.debug("Initialized Youtube support")
 
  def transform(self, url):
   if url.lower().endswith(self.audio_extensions):
