@@ -5,7 +5,7 @@ from . import soundcloud
 import youtube_dl
 
 class AudioURLTransformer(object):
- audio_extensions = ('.mp3', '.wav', '.ogg', '.flac', '.wma', '.m4a', '.aac')
+ audio_extensions = ('.mp3', '.wav', '.ogg', '.flac', '.wma', '.m4a', '.aac', '.mp4')
 
  def __init__(self, soundcloud_client_id=None):
   if soundcloud_client_id:
