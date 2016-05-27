@@ -48,7 +48,7 @@ class AudioURLTransformer(object):
 
  def transform_youtube(self, url):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
-  for format in info['formats'][-1::-1]:
+  for format in [i for i in info['formats'] if i['format_id'] == '18']:
    if format['url']:
     return format['url']
 
