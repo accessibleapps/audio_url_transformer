@@ -46,11 +46,18 @@ class AudioURLTransformer(object):
  def transform_audioboom(self, url, r):
   return r.sub(r'http://audioboom.com/boos/\1.mp3', url)
 
- def transform_youtube(self, url):
+ def youtube_dl_transformer(self, url, format_id):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
-  for format in [i for i in info['formats'] if i['format_id'] == '18']:
+  for format in [i for i in info['formats'] if i['format_id'] == format_id]:
    if format['url']:
     return format['url']
+
+ def transform_youtube(self, url):
+    return self.youtube_dl_transformer(url, format_id='18')
+
+ def transform_vine(self, url):
+  return self.youtube_dl_transformer(url, format_id='h264-450')
+
 
 
 
@@ -63,6 +70,7 @@ class AudioURLTransformer(object):
   re.compile(r'(https?://(?:www\.)?twup.me/.+)'): transform_twup,
   re.compile(r'(https?://(?:www\.)?(m\.)?youtube.com/watch.+)'): transform_youtube,
   re.compile(r'(https?://(?:www\.)?(m\.)?youtu.be/.+)'): transform_youtube,
+  re.compile(r'https?://vine.co/.+'): transform_vine,
   #audioboo
   AUDIOBOO_FM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_FM_RE),
   AUDIOBOO_SHORT_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_SHORT_RE),
