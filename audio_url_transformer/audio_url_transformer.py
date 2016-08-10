@@ -46,18 +46,18 @@ class AudioURLTransformer(object):
  def transform_audioboom(self, url, r):
   return r.sub(r'http://audioboom.com/boos/\1.mp3', url)
 
- def youtube_dl_transformer(self, url, format_id):
+ def youtube_dl_transformer(self, url, format_ids):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
-  for format in [i for i in info['formats'] if i['format_id'] == format_id]:
+  for format in [i for i in info['formats'] if i['format_id'] in format_ids]:
    if format['url']:
     return format['url']
+  raise ValueError("Unable to find URL for format ID %r" % format_id)
 
  def transform_youtube(self, url):
-    return self.youtube_dl_transformer(url, format_id='18')
+    return self.youtube_dl_transformer(url, format_ids=('18', ))
 
  def transform_vine(self, url):
-  return self.youtube_dl_transformer(url, format_id='h264-450')
-
+  return self.youtube_dl_transformer(url, format_ids=('h264-450', 'h264-200'))
 
 
 
