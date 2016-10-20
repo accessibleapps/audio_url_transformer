@@ -75,7 +75,7 @@ class AudioURLTransformer(object):
   re.compile(r'(https?://(?:www\.)?(m\.)?youtube.com/watch.+)'): transform_youtube,
   re.compile(r'(https?://(?:www\.)?(m\.)?youtu.be/.+)'): transform_youtube,
   re.compile(r'https?://vine.co/.+'): transform_vine,
-  re.compile(r'https?://amp.twimg.com/v/.+': transform_twitter,
+  re.compile(r'https?://amp.twimg.com/v/.+'): transform_twitter,
   #audioboo
   AUDIOBOO_FM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_FM_RE),
   AUDIOBOO_SHORT_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_SHORT_RE),
