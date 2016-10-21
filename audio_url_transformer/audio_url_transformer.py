@@ -68,6 +68,7 @@ class AudioURLTransformer(object):
  AUDIOBOO_FM_RE = re.compile(r'https?://(?:www.)?audioboo.fm/boos/(\d+).*')
  AUDIOBOO_SHORT_RE = re.compile(r'https?://(?:www.)?boo.fm/b(\d+).*')
  AUDIOBOOM_RE = re.compile(r'https?://(?:www.)?audioboom.com/boos/(\d+).*')
+ NEW_AUDIOBOOM_RE = re.compile(r'https?://(?:www.)?audioboom.com/posts/(\d+).*')
  matches = {
   re.compile(r'(^https?://(www\.)?(m\.)?soundcloud.com/.*/.*$)'): transform_soundcloud,
   re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
@@ -80,4 +81,5 @@ class AudioURLTransformer(object):
   AUDIOBOO_FM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_FM_RE),
   AUDIOBOO_SHORT_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_SHORT_RE),
   AUDIOBOOM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOOM_RE),
+  NEW_AUDIOBOOM_RE: lambda self, url: self.transform_audioboom(url, self.NEW_AUDIOBOOM_RE),
    }
