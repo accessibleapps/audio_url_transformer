@@ -44,7 +44,7 @@ class AudioURLTransformer(object):
   return re.sub(r'(http://(?:www\.)?twup.me/.+)', r'\1', url)
 
  def transform_audioboom(self, url, r):
-  return r.sub(r'http://audioboom.com/boos/\1.mp3', url)
+  return r.sub(r'https://audioboom.com/boos/\1.mp3', url)
 
  def youtube_dl_transformer(self, url, format_ids):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
