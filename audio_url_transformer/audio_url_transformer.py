@@ -20,7 +20,7 @@ class AudioURLTransformer(object):
  def transform(self, url):
   if url.lower().endswith(self.audio_extensions):
    return url
-  for (regexp, processor) in self.matches.iteritems():
+  for (regexp, processor) in self.matches.items():
    if not regexp.search(url):
     continue
    return processor(self, url)
