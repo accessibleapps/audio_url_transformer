@@ -54,7 +54,7 @@ class AudioURLTransformer(object):
   for format in [i for i in info['formats'] if i['format_id'] in format_ids]:
    if format['url']:
     return format['url']
-  raise ValueError("Unable to find URL for format ID %r" % format_id)
+  raise ValueError("Unable to find URL for format IDs %r" % format_ids)
 
  def transform_youtube(self, url):
     return self.youtube_dl_transformer(url, format_ids=('18', ))
