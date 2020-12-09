@@ -4,7 +4,7 @@ logger = getLogger('audio_url_transformer')
 
 import re
 from . import soundcloud
-import youtube_dl
+
 
 class AudioURLTransformer(object):
  audio_extensions = ('.mp3', '.wav', '.ogg', '.flac', '.wma', '.m4a', '.aac', '.mp4')
@@ -13,9 +13,7 @@ class AudioURLTransformer(object):
   if soundcloud_client_id:
    self.soundcloud_api = soundcloud.SoundCloudAPI(soundcloud_client_id)
    logger.debug("Initialized Soundcloud support")
-  self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
-  self.youtube_dl.add_default_info_extractors()
-  logger.debug("Initialized Youtube support")
+  self.youtube_dl = None
 
  def transform(self, url):
   if url.lower().endswith(self.audio_extensions):
@@ -47,6 +45,11 @@ class AudioURLTransformer(object):
   return r.sub(r'https://audioboom.com/boos/\1.mp3', url)
 
  def youtube_dl_transformer(self, url, format_ids):
+  if self.youtube_dl is None:
+   import youtube_dl
+   self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
+   self.youtube_dl.add_default_info_extractors()
+   logger.debug("Initialized Youtube support")
   info = self.youtube_dl.extract_info(url, download=False, process=False)
   for format in [i for i in info['formats'] if i['format_id'] in format_ids]:
    if format['url']:
