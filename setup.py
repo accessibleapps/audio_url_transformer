@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = 0.11
+__version__ = 0.12
 __doc__ = """Determine if certain audio links need to be transformed before they can be played, and do so"""
 
 setup(

@@ -45,11 +45,7 @@ class AudioURLTransformer(object):
   return r.sub(r'https://audioboom.com/boos/\1.mp3', url)
 
  def youtube_dl_transformer(self, url, format_ids):
-  if self.youtube_dl is None:
-   import youtube_dl
-   self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
-   self.youtube_dl.add_default_info_extractors()
-   logger.debug("Initialized Youtube support")
+  self.ensure_youtube_dl()
   info = self.youtube_dl.extract_info(url, download=False, process=False)
   for format in [i for i in info['formats'] if i['format_id'] in format_ids]:
    if format['url']:
@@ -60,18 +56,26 @@ class AudioURLTransformer(object):
     return self.youtube_dl_transformer(url, format_ids=('18', ))
 
  def transform_vine(self, url):
+  self.ensure_youtube_dl()
   return self.youtube_dl_transformer(url, format_ids=('h264-450', 'h264-200'))
 
  def transform_twitter(self, url):
+  self.ensure_youtube_dl()
   info = self.youtube_dl.extract_info(url, download=False, process=False)
   return info['formats'][-1]['url']
 
-
+ def ensure_youtube_dl(self):
+  if self.youtube_dl is None:
+   import youtube_dl
+   self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
+   self.youtube_dl.add_default_info_extractors()
+   logger.debug("Initialized Youtube support")
 
  AUDIOBOO_FM_RE = re.compile(r'https?://(?:www.)?audioboo.fm/boos/(\d+).*')
  AUDIOBOO_SHORT_RE = re.compile(r'https?://(?:www.)?boo.fm/b(\d+).*')
  AUDIOBOOM_RE = re.compile(r'https?://(?:www.)?audioboom.com/boos/(\d+).*')
  NEW_AUDIOBOOM_RE = re.compile(r'https?://(?:www.)?audioboom.com/posts/(\d+).*')
+
  matches = {
   re.compile(r'(^https?://(www\.)?(m\.)?soundcloud.com/.*/.*$)'): transform_soundcloud,
   re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
@@ -80,9 +84,10 @@ class AudioURLTransformer(object):
   re.compile(r'(https?://(?:www\.)?(m\.)?youtu.be/.+)'): transform_youtube,
   re.compile(r'https?://vine.co/.+'): transform_vine,
   re.compile(r'https?://amp.twimg.com/v/.+'): transform_twitter,
+  re.compile(r'https?://twitter.com/.+/status/.+/video/.+'): transform_twitter,
   #audioboo
   AUDIOBOO_FM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_FM_RE),
   AUDIOBOO_SHORT_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOO_SHORT_RE),
   AUDIOBOOM_RE: lambda self, url: self.transform_audioboom(url, self.AUDIOBOOM_RE),
   NEW_AUDIOBOOM_RE: lambda self, url: self.transform_audioboom(url, self.NEW_AUDIOBOOM_RE),
-   }
+ }
