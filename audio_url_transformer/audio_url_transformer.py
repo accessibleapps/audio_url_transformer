@@ -66,8 +66,8 @@ class AudioURLTransformer(object):
 
  def ensure_youtube_dl(self):
   if self.youtube_dl is None:
-   import youtube_dl
-   self.youtube_dl = youtube_dl.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
+   import yt_dlp
+   self.youtube_dl = yt_dlp.YoutubeDL(params=dict(outtmpl = u"%(title)s [%(extractor)s '%(id)s].%(ext)s", quiet=True, ))
    self.youtube_dl.add_default_info_extractors()
    logger.debug("Initialized Youtube support")
 
