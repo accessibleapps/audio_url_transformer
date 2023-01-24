@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = 0.12
+__version__ = "1.2"
 __doc__ = """Determine if certain audio links need to be transformed before they can be played, and do so"""
 
 setup(
@@ -10,10 +10,10 @@ setup(
  packages = find_packages(),
  install_requires = [
   'requests',
-  'youtube_dl',
+  'yt_dlp',
  ],
  classifiers = [
-  'Development Status :: 3 - Alpha',
+  'Development Status :: 4 - Beta',
   'Intended Audience :: Developers',
   'Programming Language :: Python',
   'Topic :: Software Development :: Libraries',
