@@ -64,6 +64,21 @@ class AudioURLTransformer(object):
   info = self.youtube_dl.extract_info(url, download=False, process=False)
   return info['formats'][-1]['url']
 
+ def transform_suno(self, url):
+  import requests
+  headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0"}
+  response = requests.get(url, headers=headers)
+  response.raise_for_status()
+  html = response.text
+  # The audio_url is in the og:audio meta tag
+  audio_match = re.search(r'<meta property="og:audio" content="([^"]+)"', html)
+  if not audio_match:
+   # Fallback: search for any cdn1.suno.ai mp3 URL
+   audio_match = re.search(r'(https://cdn1\.suno\.ai/[a-f0-9-]+\.mp3)', html)
+   if not audio_match:
+    raise ValueError("Could not find audio URL in Suno page")
+  return audio_match.group(1)
+
  def ensure_youtube_dl(self):
   if self.youtube_dl is None:
    import yt_dlp
@@ -77,6 +92,7 @@ class AudioURLTransformer(object):
  NEW_AUDIOBOOM_RE = re.compile(r'https?://(?:www.)?audioboom.com/posts/(\d+).*')
 
  matches = {
+  re.compile(r'https?://(?:www\.)?suno\.com/s/.+'): transform_suno,
   re.compile(r'(^https?://(www\.)?(m\.)?soundcloud.com/.*/.*$)'): transform_soundcloud,
   re.compile(r'(https?://(?:www\.)?sndup.net/(.+)/a)'): transform_sndup,
   re.compile(r'(https?://(?:www\.)?twup.me/.+)'): transform_twup,
