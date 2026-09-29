@@ -1,0 +1,14 @@
+{
+  "_comment": "Abridged yt-dlp extract_info(process=False) result for a YouTube live stream (HLS only). Hand-authored; URLs are fake.",
+  "id": "LiVeStReAm1",
+  "title": "Fixture Live Radio",
+  "extractor": "youtube",
+  "extractor_key": "Youtube",
+  "webpage_url": "https://www.youtube.com/watch?v=LiVeStReAm1",
+  "is_live": true,
+  "live_status": "is_live",
+  "formats": [
+    {"format_id": "91", "url": "https://manifest.example.googlevideo.com/api/manifest/hls_playlist/expire/1790001234/itag/91/index.m3u8", "protocol": "m3u8_native", "ext": "mp4", "acodec": "mp4a.40.5", "vcodec": "avc1.4d400c", "tbr": 270.0},
+    {"format_id": "93", "url": "https://manifest.example.googlevideo.com/api/manifest/hls_playlist/expire/1790001234/itag/93/index.m3u8", "protocol": "m3u8_native", "ext": "mp4", "acodec": "mp4a.40.2", "vcodec": "avc1.4d401e", "tbr": 1000.0}
+  ]
+}

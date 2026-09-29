@@ -1,0 +1,23 @@
+{
+  "_comment": "Abridged yt-dlp extract_info(process=False) result for a YouTube VOD that no longer offers format 18. Hand-authored in the extractor's shape; URLs are fake.",
+  "id": "AbCdEfGhIjK",
+  "title": "Fixture Video",
+  "extractor": "youtube",
+  "extractor_key": "Youtube",
+  "webpage_url": "https://www.youtube.com/watch?v=AbCdEfGhIjK",
+  "duration": 212,
+  "is_live": false,
+  "live_status": "not_live",
+  "http_headers": {
+    "User-Agent": "Mozilla/5.0 (fixture)",
+    "Accept-Language": "en-us,en;q=0.5"
+  },
+  "formats": [
+    {"format_id": "139", "url": "https://rr1.example.googlevideo.com/videoplayback?itag=139&expire=1790000000&sig=SECRET139", "ext": "m4a", "acodec": "mp4a.40.5", "vcodec": "none", "abr": 48.8, "audio_ext": "m4a", "video_ext": "none"},
+    {"format_id": "249", "url": "https://rr1.example.googlevideo.com/videoplayback?itag=249&expire=1790000000&sig=SECRET249", "ext": "webm", "acodec": "opus", "vcodec": "none", "abr": 50.1, "audio_ext": "webm", "video_ext": "none"},
+    {"format_id": "140", "url": "https://rr1.example.googlevideo.com/videoplayback?itag=140&expire=1790000000&sig=SECRET140", "ext": "m4a", "acodec": "mp4a.40.2", "vcodec": "none", "abr": 129.5, "audio_ext": "m4a", "video_ext": "none"},
+    {"format_id": "251", "url": "https://rr1.example.googlevideo.com/videoplayback?itag=251&expire=1790000000&sig=SECRET251", "ext": "webm", "acodec": "opus", "vcodec": "none", "abr": 135.2, "audio_ext": "webm", "video_ext": "none"},
+    {"format_id": "137", "url": "https://rr1.example.googlevideo.com/videoplayback?itag=137&expire=1790000000&sig=SECRET137", "ext": "mp4", "acodec": "none", "vcodec": "avc1.640028", "tbr": 4000.0, "audio_ext": "none", "video_ext": "mp4"},
+    {"format_id": "96", "url": "https://manifest.example.googlevideo.com/api/manifest/hls_playlist/expire/1790000000/itag/96/index.m3u8", "protocol": "m3u8_native", "ext": "mp4", "acodec": "mp4a.40.2", "vcodec": "avc1.640028", "tbr": 4500.0}
+  ]
+}

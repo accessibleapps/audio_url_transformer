@@ -1,0 +1,14 @@
+{
+  "_comment": "Abridged yt-dlp result for a finite DASH-only source (fragmented formats, no progressive URL). Hand-authored; URLs are fake.",
+  "id": "dash-7",
+  "title": "Fixture DASH Talk",
+  "extractor": "generic",
+  "extractor_key": "Generic",
+  "webpage_url": "https://video.example.net/talks/7",
+  "duration": 95,
+  "formats": [
+    {"format_id": "dash-audio-opus", "url": "https://video.example.net/talks/7/manifest.mpd", "protocol": "http_dash_segments", "fragments": [{"path": "a/opus/1.webm"}], "ext": "webm", "acodec": "opus", "vcodec": "none", "abr": 160.0},
+    {"format_id": "dash-audio-aac", "url": "https://video.example.net/talks/7/manifest.mpd", "protocol": "http_dash_segments", "fragments": [{"path": "a/aac/1.m4a"}], "ext": "m4a", "acodec": "mp4a.40.2", "vcodec": "none", "abr": 128.0},
+    {"format_id": "dash-video", "url": "https://video.example.net/talks/7/manifest.mpd", "protocol": "http_dash_segments", "fragments": [{"path": "v/1.mp4"}], "ext": "mp4", "acodec": "none", "vcodec": "avc1.4d401f"}
+  ]
+}

@@ -20,3 +20,13 @@ dependencies = [
     "requests",
     "yt_dlp",
 ]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+audio-url-transformer-smoke = "audio_url_transformer.smoke:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
