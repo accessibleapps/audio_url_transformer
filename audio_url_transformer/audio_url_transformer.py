@@ -3,6 +3,7 @@ from logging import getLogger
 logger = getLogger('audio_url_transformer')
 
 import re
+from . import resolve
 from . import soundcloud
 
 
@@ -23,6 +24,17 @@ class AudioURLTransformer(object):
     continue
    return processor(self, url)
   raise ValueError("Unable to find a processor for url %s" % url)
+
+ def resolve_info(self, url, capabilities=None):
+  """Structured resolution; see audio_url_transformer.resolve.resolve_info.
+
+  transform(url) is unchanged and still returns a bare URL.
+  """
+  ydl = None
+  if resolve.needs_extractor(url, capabilities):
+   self.ensure_youtube_dl()
+   ydl = self.youtube_dl
+  return resolve.resolve_info(url, capabilities, ydl=ydl)
 
  def is_audio_url(self, url):
   if url.endswith(self.audio_extensions):

@@ -1,0 +1,15 @@
+{
+  "_comment": "Abridged yt-dlp generic-extractor result for a finite HLS VOD. Hand-authored; URLs are fake.",
+  "id": "lecture-42",
+  "title": "Fixture Lecture",
+  "extractor": "generic",
+  "extractor_key": "Generic",
+  "webpage_url": "https://media.example.org/lectures/42",
+  "duration": 1800.5,
+  "is_live": false,
+  "formats": [
+    {"format_id": "hls-64", "url": "https://media.example.org/lectures/42/audio_64.m3u8", "manifest_url": "https://media.example.org/lectures/42/master.m3u8", "protocol": "m3u8_native", "ext": "mp4", "acodec": "mp4a.40.2", "vcodec": "none", "tbr": 64.0},
+    {"format_id": "hls-128", "url": "https://media.example.org/lectures/42/audio_128.m3u8", "manifest_url": "https://media.example.org/lectures/42/master.m3u8", "protocol": "m3u8_native", "ext": "mp4", "acodec": "mp4a.40.2", "vcodec": "none", "tbr": 128.0},
+    {"format_id": "hls-720p", "url": "https://media.example.org/lectures/42/video_720.m3u8", "manifest_url": "https://media.example.org/lectures/42/master.m3u8", "protocol": "m3u8_native", "ext": "mp4", "vcodec": "avc1.4d401f", "tbr": 2400.0}
+  ]
+}
