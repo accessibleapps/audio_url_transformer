@@ -339,6 +339,39 @@ def test_transformer_method_uses_its_youtube_dl(fake_ydl, load_info):
     assert d.rendition_id == '140'
 
 
+def test_transformer_direct_audio_needs_no_extractor(monkeypatch):
+    aut = AudioURLTransformer()
+
+    def unexpected_extractor():
+        pytest.fail('a playable direct audio URL must not initialize yt-dlp')
+
+    monkeypatch.setattr(aut, 'ensure_youtube_dl', unexpected_extractor)
+    url = 'https://files.example.com/song.MP3?expire=1790000099'
+    d = aut.resolve_info(url, Capabilities.from_client(['audio/mpeg']))
+    assert d.kind == KIND_PROGRESSIVE
+    assert d.original_url == d.origin_url == url
+    assert d.mime_type == 'audio/mpeg'
+    assert d.expires_at == 1790000099.0
+    assert aut.youtube_dl is None
+
+
+def test_transformer_initializes_extractor_and_forwards_capabilities(monkeypatch, fake_ydl, load_info):
+    aut = AudioURLTransformer()
+    ydl = fake_ydl(load_info('youtube_vod_no_format_18'))
+
+    def initialize_extractor():
+        assert aut.youtube_dl is None
+        aut.youtube_dl = ydl
+
+    monkeypatch.setattr(aut, 'ensure_youtube_dl', initialize_extractor)
+    d = aut.resolve_info(YT_URL, Capabilities.from_client(['audio/webm']))
+    assert d.kind == KIND_PROGRESSIVE
+    assert d.rendition_id == '251'
+    assert d.mime_type == 'audio/webm'
+    assert aut.youtube_dl is ydl
+    assert ydl.calls == [(YT_URL, False, False)]
+
+
 def test_network_is_blocked_in_unit_tests():
     with pytest.raises(AssertionError):
         socket.create_connection(('example.com', 80))
